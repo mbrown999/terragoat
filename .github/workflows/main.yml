@@ -1,5 +1,5 @@
 name: KICS IaC
-on: [push]
+on: [push, pull_request]
 
 jobs:
   kics:
@@ -14,7 +14,7 @@ jobs:
     - name: run kics Scan
       uses: checkmarx/kics-github-action@v2.0.0
       with:
-        path: './'
+        path: './terraform'
         fail_on: high
         output_path: myResults/
     # Display the results in json format
