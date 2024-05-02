@@ -1,0 +1,23 @@
+name: KICS IaC
+on: [push]
+
+jobs:
+  kics:
+    name: kics-iac
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v3
+    # Scan Iac with kics
+    - name: run kics Scan
+      uses: checkmarx/kics-github-action@v2.0.0
+      with:
+        path: './'
+        fail_on: high
+        output_path: myResults/
+    # Display the results in json format
+    - name: display kics results
+      run: |
+        cat myResults/results.json
